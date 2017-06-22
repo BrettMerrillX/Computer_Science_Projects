@@ -1,0 +1,104 @@
+.pos 0
+Init:
+    irmovl Stack, %ebp
+    irmovl Stack, %esp
+    call Main		# Execute main program
+	halt
+    
+.pos 0x100
+Stack:
+    # Array of 4 elements
+	.align 4 	
+array:	
+    .long 0x0003
+	.long 0x0001
+	.long 0x0007
+	.long 0x0009
+	.long 0x0005
+	.long 0x0006
+	.long 0x0002
+	.long 0x0008
+	.long 0x0004
+	.long 0x0010
+	
+Main:
+    pushl %ebp 
+	rrmovl %esp,%ebp
+	irmovl $9,%eax	
+	pushl %eax	    	# Push 10
+	irmovl array,%edx
+	pushl %edx      	# Push array
+	call selecSort		# Sum(array, 4)
+	rrmovl %ebp,%esp
+	popl %ebp
+	ret 
+	
+	#swap (int *x, int *y) 
+swap:
+    pushl %ebp
+    rrmovl %esp, %ebp
+    
+    mrmovl 8(%ebp), %eax
+    mrmovl 12(%ebp), %ebx
+    
+    pushl %ecx
+    pushl %edi
+    
+    mrmovl (%ebx), %ecx
+    mrmovl (%eax), %edi
+    
+    rmmovl %edi, (%ebx)
+    rmmovl %ecx,(%eax)
+    
+    brk
+    popl %edi
+    popl %ecx
+	popl %ebp
+	ret
+    
+	# selectSort( int *start, count
+selecSort:
+    pushl %ebp
+	rrmovl %esp,%ebp
+	mrmovl 8(%ebp),%ecx 
+	mrmovl 12(%ebp),%edx
+	pushl %edx
+	andl   %edx,%edx	# Set condition codes
+	je     End
+Loop:
+    mrmovl (%ecx),%esi	    # get *Start
+    rrmovl %ecx, %edi
+    andl   %edx, %edx
+    jne Loop2
+	irmovl $4,%ebx          # 
+	addl %ebx,%ecx          # Start++
+	popl %edx
+	irmovl $-1,%ebx	        # 
+	addl %ebx,%edx          # Count--
+	pushl %edx
+	jne Loop                # Stop when 0
+	je End
+Loop2:
+    irmovl $4,%ebx          # 
+	addl %ebx,%edi          # Start++
+	mrmovl (%edi),%ebx
+	pushl %ecx
+	pushl %edi
+	pushl %esi
+	subl %ebx, %esi        # if ebx is less that esi
+	popl %esi
+	jle NotLessThan         # jumps past swap
+	call swap
+	mrmovl (%ebx), %esi
+NotLessThan:
+    popl %edi
+    popl %ecx
+	irmovl $-1,%ebx	        # 
+	addl %ebx,%edx          # Count--
+	je Loop
+	jne Loop2               # Stop when 0
+
+End:
+    rrmovl %ebp,%esp
+	popl %ebp
+	ret
