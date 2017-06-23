@@ -1,0 +1,24 @@
+create world 5
+create robot T1 0 5
+create robot T2 4 5
+create fire Inferno 2 5
+create waypoint B 2 5
+status
+show
+t1 move B
+t2 move B
+go
+show
+go
+show
+t2 attack Inferno
+t1 attack Inferno
+go
+show
+go
+show
+go
+show
+status
+quit
+y

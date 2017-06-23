@@ -1,0 +1,1 @@
+Initial World State of the Rescue Robot Simulation: sim_object_typeXXX=World size=52,201 

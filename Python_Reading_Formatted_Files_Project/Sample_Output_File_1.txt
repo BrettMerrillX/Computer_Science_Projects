@@ -1,0 +1,5 @@
+
+Running Rescue Robot Simulation Program
+Opening input file: Sample_Input_File_1.txt
+
+Simulation Object List:

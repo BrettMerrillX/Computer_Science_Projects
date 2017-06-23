@@ -1,0 +1,10 @@
+
+Running Rescue Robot Simulation Program
+Opening input file: Sample_Input_File_3.txt
+
+Simulation Object List:
+World of size (52, 201)
+Person "Akiko" appears at (26, 95)
+Supplier robot "Lifeline" appears at (4, 36)
+Carrier robot "Stokes" appears at (3, 42)
+Person "Pablo" appears at (36, 195)

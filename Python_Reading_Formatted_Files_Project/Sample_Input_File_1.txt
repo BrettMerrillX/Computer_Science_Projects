@@ -1,0 +1,1 @@
+Initial World State of the Rescue Robot Simulation:

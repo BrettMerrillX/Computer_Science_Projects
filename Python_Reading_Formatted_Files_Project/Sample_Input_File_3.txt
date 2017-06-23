@@ -1,0 +1,6 @@
+Initial World State of the Rescue Robot Simulation:
+sim_object_type=World size=52,201
+sim_object_type=Person name=Akiko location=26,95
+sim_object_type=Robot name=Lifeline robot_type=Supplier location=4,36
+sim_object_type=Robot name=Stokes robot_type=Carrier location=3,42
+sim_object_type=Person name=Pablo location=36,195

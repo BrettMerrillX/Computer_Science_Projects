@@ -1,0 +1,4 @@
+
+Running Rescue Robot Simulation Program
+Opening input file: Sample_Input_File_2.txt
+Input file error in line 1: "BAD DATA IN FILE Initial World State:"
