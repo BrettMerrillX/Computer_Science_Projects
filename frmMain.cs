@@ -76,15 +76,19 @@ namespace SDP {
                         csvParser.SetDelimiters(new string[] { "," });
                         csvParser.HasFieldsEnclosedInQuotes = chkHasFieldsEnclosedInQuotes.Checked;
 
-                        // Read the row with the column names
+                        //// Read the row with the column names
                         //string[] fields = csvParser.ReadFields();
                         //
                         //lstHeader.Items.Clear();
                         //lstHeader.MultiColumn = false;
                         //lstHeader.Items.AddRange(fields);
 
+
                         //========================================
                         //Brett's edit
+
+                        // Populates the two boxes labeled lstHeader and fileHeader with 
+                        // the items in the array dbFeilds and fields respectively. 
 
                         fields = csvParser.ReadFields();
                         fieldsBackup = new string[fields.Length];
@@ -96,7 +100,8 @@ namespace SDP {
                         fileHeader.Items.Clear();
                         fileHeader.MultiColumn = false;
                         fileHeader.Items.AddRange(fields);
-                        // end
+                        // Done
+                        //========================================
 
 
                     }
@@ -182,6 +187,7 @@ namespace SDP {
                 var fileName = Path.GetFileNameWithoutExtension(file);
                 var extension = Path.GetExtension(file);
                 var header = "LOAD DATA LOCAL INFILE\n";
+                //========================================
                 //Brett's edits
                 //adds @ to the begining of the file fields that don't exist in the database
                 int i = 0;
@@ -209,14 +215,15 @@ namespace SDP {
                 using (var sw = new StreamWriter(path + @"\b2b_auto_load.sql", true)) {
                     sw.Write(contents);
                 }
+                //Done.
+                //========================================
             }
             statusPanel.Text = @"Make Import Files complete.";
             
             datetimePanel.Text = System.DateTime.Today.ToLongDateString();
         }
 
-        //========================================
-        //Brett's edit
+        
 
         private void chkSelectAll_CheckedChanged(object sender, EventArgs e) {
             for (int i = 0; i < lstFiles.Items.Count; i++) {
@@ -239,7 +246,14 @@ namespace SDP {
             datetimePanel.Text = System.DateTime.Today.ToLongDateString();
         }
 
+        //========================================
+        //Brett's edit
+        
+        
         private void btnRenameColumn_Click(object sender, EventArgs e)
+        // Uses the selcted items from the text boxes named lstHeader and fileHeader
+        // and changes the item from fileHeader to match the item from lstHeader.
+        // Then updates the text box.
         {
             var fileHeaderChoice = fileHeader.Text.ToString();
             var dbHeaderChoice = lstHeader.Text.ToString();
@@ -254,10 +268,14 @@ namespace SDP {
             fileHeader.Items.Clear();
             fileHeader.MultiColumn = false;
             fileHeader.Items.AddRange(fields);
-            statusPanel.Text = @"dbChoice: " + dbHeaderChoice + " fileChoice: " + fileHeaderChoice;
+            
         }
 
+
+        
         private void btnRevertToOriginal_Click(object sender, EventArgs e)
+        // Uses the fieldsBackup array to change the fields array back to the original
+        // Then updates the text box.
         {
             statusPanel.Text = fieldsBackup[0].ToString();
             fields = fieldsBackup;
@@ -265,5 +283,9 @@ namespace SDP {
             fileHeader.MultiColumn = false;
             fileHeader.Items.AddRange(fields);
         }
+        //Done.
+        //========================================
+       
     }
 }
+
