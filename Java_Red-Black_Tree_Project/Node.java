@@ -1,4 +1,3 @@
-/**  * Created by sammergendahl on 2/20/17.  */
 public class Node<E extends Comparable<E>> {   
 	private E data;    
 	private char color; 
